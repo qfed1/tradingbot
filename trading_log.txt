@@ -16839,9 +16839,7 @@ File "live_trader.py", line 63:
 
 During: Pass nopython_type_inference
 2025-06-30 22:03:01,535 ERROR: Message: {"period_id":"1MIN","time_period_start":"2025-06-30T22:03:00.0000000Z","time_period_end":"2025-06-30T22:04:00.0000000Z","time_open":"2025-06-30T22:03:00.5770000Z","time_close":"2025-06-30T22:03:00.5770000Z","price_open":107221.5,"price_high":107221.5,"price_low":107221.5,"price_close":107221.5,"volume_traded":0,"trades_count":0,"symbol_id":"BITSTAMP_SPOT_BTC_USD","sequence":1199567,"type":"ohlcv"}
-e_open":"2025-06-30T21:21:00.4100000Z","time_close":"2025-06-30T21:21:00.4100000Z","price_open":2500.25,"price_high":2500.25,"price_low":2500.25,"price_close":2500.25,"volume_traded":0,"trades_count":0,"symbol_id":"BITSTAMP_SPOT_ETH_USD","sequence":1246213,"type":"ohlcv"}
-2025-06-30 21:21:01,305 INFO: 2025-06-30 21:21:01.305446+00:00 | SELL BINANCE_SPOT_SOL_USDT @ 156.67 | Stop: 159.80 | Reason: VPVR peak at 155.82 with S/R zone resistance at 157.83
-2025-06-30 21:21:05,803 ERROR: Error processing message: Failed in nopython mode pipeline (step: nopython frontend)
+2025-06-30 22:04:02,877 ERROR: Error processing message: Failed in nopython mode pipeline (step: nopython frontend)
 non-precise type array(pyobject, 1d, C)
 During: typing of argument at /home/algobot/trader/live_trader.py (63)
 
@@ -16851,11 +16849,19 @@ File "live_trader.py", line 63:
     ^
 
 During: Pass nopython_type_inference
-2025-06-30 21:21:05,803 ERROR: Message: {"period_id":"1MIN","time_period_start":"2025-06-30T21:21:00.0000000Z","time_period_end":"2025-06-30T21:22:00.0000000Z","time_open":"2025-06-30T21:21:05.3530000Z","time_close":"2025-06-30T21:21:05.3530000Z","price_open":107487,"price_high":107487,"price_low":107487,"price_close":107487,"volume_traded":0.02964386,"trades_count":1,"symbol_id":"BITSTAMP_SPOT_BTC_USD","sequence":1193361,"type":"ohlcv"}
-2025-06-30 21:22:00,308 INFO: 2025-06-30 21:22:00.308459+00:00 | BUY BINANCE_SPOT_SOL_USDT @ 156.38 | Reason: Resistance trendline broken | P&L: 0.19%
-2025-06-30 21:22:00,512 ERROR: Error processing message: Failed in nopython mode pipeline (step: nopython frontend)
+2025-06-30 22:04:02,877 ERROR: Message: {"period_id":"1MIN","time_period_start":"2025-06-30T22:04:00.0000000Z","time_period_end":"2025-06-30T22:05:00.0000000Z","time_open":"2025-06-30T22:04:00.7520000Z","time_close":"2025-06-30T22:04:00.7520000Z","price_open":2492.65,"price_high":2492.65,"price_low":2492.65,"price_close":2492.65,"volume_traded":0,"trades_count":0,"symbol_id":"BITSTAMP_SPOT_ETH_USD","sequence":1252934,"type":"ohlcv"}
+2025-06-30 22:04:02,898 ERROR: Error processing message: Failed in nopython mode pipeline (step: nopython frontend)
 non-precise type array(pyobject, 1d, C)
 During: typing of argument at /home/algobot/trader/live_trader.py (63)
+
+File "live_trader.py", line 63:
+    entry_time: datetime
+    stop_loss: float
+    ^
+
+During: Pass nopython_type_inference
+2025-06-30 22:04:02,898 ERROR: Message: {"period_id":"1MIN","time_period_start":"2025-06-30T22:04:00.0000000Z","time_period_end":"2025-06-30T22:05:00.0000000Z","time_open":"2025-06-30T22:04:00.8430000Z","time_close":"2025-06-30T22:04:00.8430000Z","price_open":107307.5,"price_high":107307.5,"price_low":107307.5,"price_close":107307.5,"volume_traded":0,"trades_count":0,"symbol_id":"BITSTAMP_SPOT_BTC_USD","sequence":1199718,"type":"ohlcv"}
+t at /home/algobot/trader/live_trader.py (63)
 
 File "live_trader.py", line 63:
     entry_time: datetime
@@ -17816,3 +17822,26 @@ File "live_trader.py", line 63:
 
 During: Pass nopython_type_inference
 2025-06-30 22:03:01,525 ERROR: Message: {"period_id":"1MIN","time_period_start":"2025-06-30T22:03:00.0000000Z","time_period_end":"2025-06-30T22:04:00.0000000Z","time_open":"2025-06-30T22:03:00.5770000Z","time_close":"2025-06-30T22:03:00.5770000Z","price_open":107221.5,"price_high":107221.5,"price_low":107221.5,"price_close":107221.5,"volume_traded":0,"trades_count":0,"symbol_id":"BITSTAMP_SPOT_BTC_USD","sequence":1199567,"type":"ohlcv"}
+2025-06-30 22:03:33,636 INFO: 2025-06-30 22:03:33.636820+00:00 | BUY BINANCE_SPOT_XRP_USDT @ 2.28 | Reason: Resistance trendline broken | P&L: 0.11%
+2025-06-30 22:04:02,876 ERROR: Error processing message: Failed in nopython mode pipeline (step: nopython frontend)
+non-precise type array(pyobject, 1d, C)
+During: typing of argument at /home/algobot/trader/live_trader.py (63)
+
+File "live_trader.py", line 63:
+    entry_time: datetime
+    stop_loss: float
+    ^
+
+During: Pass nopython_type_inference
+2025-06-30 22:04:02,876 ERROR: Message: {"period_id":"1MIN","time_period_start":"2025-06-30T22:04:00.0000000Z","time_period_end":"2025-06-30T22:05:00.0000000Z","time_open":"2025-06-30T22:04:00.7520000Z","time_close":"2025-06-30T22:04:00.7520000Z","price_open":2492.65,"price_high":2492.65,"price_low":2492.65,"price_close":2492.65,"volume_traded":0,"trades_count":0,"symbol_id":"BITSTAMP_SPOT_ETH_USD","sequence":1252934,"type":"ohlcv"}
+2025-06-30 22:04:02,896 ERROR: Error processing message: Failed in nopython mode pipeline (step: nopython frontend)
+non-precise type array(pyobject, 1d, C)
+During: typing of argument at /home/algobot/trader/live_trader.py (63)
+
+File "live_trader.py", line 63:
+    entry_time: datetime
+    stop_loss: float
+    ^
+
+During: Pass nopython_type_inference
+2025-06-30 22:04:02,896 ERROR: Message: {"period_id":"1MIN","time_period_start":"2025-06-30T22:04:00.0000000Z","time_period_end":"2025-06-30T22:05:00.0000000Z","time_open":"2025-06-30T22:04:00.8430000Z","time_close":"2025-06-30T22:04:00.8430000Z","price_open":107307.5,"price_high":107307.5,"price_low":107307.5,"price_close":107307.5,"volume_traded":0,"trades_count":0,"symbol_id":"BITSTAMP_SPOT_BTC_USD","sequence":1199718,"type":"ohlcv"}
