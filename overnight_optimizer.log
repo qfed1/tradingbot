@@ -1,4 +1,0 @@
-2025-06-30 06:27:42,767 INFO: Starting overnight optimization process
-2025-06-30 06:27:42,767 INFO: Monitoring log: trading_log.txt
-2025-06-30 06:27:42,767 INFO: Symbols: ['BITSTAMP_SPOT_BTC_USD', 'BITSTAMP_SPOT_ETH_USD', 'BINANCE_SPOT_SOL_USDT', 'BINANCE_SPOT_XRP_USDT']
-2025-06-30 06:27:42,767 INFO: Running monitoring cycle
