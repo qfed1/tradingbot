@@ -14,6 +14,12 @@ import time
 import json
 import logging
 import threading
+try:
+    import ccxt  # type: ignore  # Live data via exchange
+except ImportError:  # noqa: E402
+    ccxt = None
+    logger = logging.getLogger('BulletproofTrader')
+    logger.warning('ccxt library not installed. Live data feed will not function without it.')
 # import numpy as np  # Not needed for this simple version
 # import pandas as pd  # Not needed for this simple version
 from datetime import datetime, timedelta
@@ -78,10 +84,36 @@ class APIKeyManager:
         logger.info(f"Switched to API key #{self.current_index + 1}")
 
 class LiveDataFeed:
-    def __init__(self, api_manager: APIKeyManager):
+    def __init__(self, api_manager: APIKeyManager):  # api_manager kept for compatibility
         self.api_manager = api_manager
         self.data_cache = {symbol: deque(maxlen=1000) for symbol in SYMBOLS}
         self.running = False
+
+        # Initialise CCXT exchange instance
+        if ccxt is None:
+            raise ImportError("ccxt library is required for LiveDataFeed. Please install with `pip install ccxt`. Use STOP_LIVE_TRADING.sh and install before restarting.")
+
+        self.exchange = ccxt.binance({
+            'enableRateLimit': True,
+            'timeout': 30000,  # 30-second socket timeout instead of 10 s
+            'options': {
+                'adjustForTimeDifference': True,  # auto-sync exchange time once at start
+            },
+        })
+
+        # Map our internal symbols (may use /USD) to Binance symbols (mostly /USDT)
+        self.symbol_map = {
+            "BTC/USD": "BTC/USDT",
+            "ETH/USD": "ETH/USDT",
+            "SOL/USDT": "SOL/USDT",
+            "XRP/USDT": "XRP/USDT",
+        }
+
+        # Timeframe to use (5m gives ~12 trades per hour across pairs, enough resolution)
+        self.timeframe = '5m'
+        
+        # Max retries for a single fetch_ohlcv call
+        self.max_retries = 3
         
     def start(self):
         self.running = True
@@ -101,36 +133,47 @@ class LiveDataFeed:
                 time.sleep(5)
                 
     def _fetch_latest_candle(self, symbol: str):
+        """Fetch the latest candle (or historical warm-up) via CCXT and append to cache."""
         try:
-            coinapi_symbol = symbol.replace('/', '_')
-            api_key = self.api_manager.get_current_key()
-            
-            url = f"https://rest.coinapi.io/v1/ohlcv/{coinapi_symbol}/latest"
-            headers = {"X-CoinAPI-Key": api_key}
-            
-            response = requests.get(url, headers=headers, timeout=10)
-            
-            if response.status_code == 200:
-                data = response.json()
-                if data:
-                    latest = data[0]
-                    candle = Candle(
-                        timestamp=datetime.fromisoformat(latest['time_period_start'].replace('Z', '+00:00')),
-                        open=float(latest['price_open']),
-                        high=float(latest['price_high']),
-                        low=float(latest['price_low']),
-                        close=float(latest['price_close']),
-                        volume=float(latest['volume_traded'])
+            exchange_symbol = self.symbol_map.get(symbol, symbol)
+
+            # If cache is empty, pull a warm-up batch so the strategy has context
+            if len(self.data_cache[symbol]) < 200:
+                limit = 200
+            else:
+                limit = 1
+
+            # Retry wrapper – network hiccups through VPN/ISP sometimes cause transient timeouts
+            for attempt in range(1, self.max_retries + 1):
+                try:
+                    ohlcvs = self.exchange.fetch_ohlcv(
+                        exchange_symbol, timeframe=self.timeframe, limit=limit
                     )
+                    break  # success → leave retry-loop
+                except Exception as e:
+                    if attempt == self.max_retries:
+                        raise  # re-raise on final attempt so outer except logs it
+                    backoff = attempt * 2  # simple linear back-off: 2 s, 4 s
+                    logger.warning(
+                        f"Timeout fetching {symbol} (try {attempt}/{self.max_retries}). Retrying in {backoff}s…"
+                    )
+                    time.sleep(backoff)
+
+            for ohlcv in ohlcvs:
+                ts, o, h, l, c, v = ohlcv
+                candle = Candle(
+                    timestamp=datetime.utcfromtimestamp(ts / 1000),
+                    open=o,
+                    high=h,
+                    low=l,
+                    close=c,
+                    volume=v,
+                )
+                # Only append if newer than last cached to avoid duplicates
+                if not self.data_cache[symbol] or candle.timestamp > self.data_cache[symbol][-1].timestamp:
                     self.data_cache[symbol].append(candle)
-                    
-            elif response.status_code == 429:
-                logger.warning("Rate limit hit, switching API key")
-                self.api_manager.switch_key()
-                time.sleep(2)
-                
         except Exception as e:
-            logger.error(f"Error fetching {symbol}: {e}")
+            logger.error(f"Error fetching {symbol} via CCXT: {e}")
             
     def get_recent_candles(self, symbol: str, count: int = 200) -> List[Candle]:
         candles = list(self.data_cache[symbol])
@@ -304,11 +347,18 @@ class BulletproofTrader:
             logger.error(f"Error checking {symbol}: {e}")
             
     def _execute_trade(self, symbol: str, direction: str, price: float, stop_level: float, structure_type: str):
+        # Ensure risk is always positive
+        risk = abs(price - stop_level)
+
         if direction == "long":
-            risk = price - stop_level
-            target_price = price + (risk * 2.0)  # 2:1 RR
-        else:
-            risk = stop_level - price  
+            # Stop must be below entry; if not, flip it
+            if stop_level >= price:
+                stop_level = price - risk
+            target_price = price + (risk * 2.0)  # 2:1 reward-to-risk
+        else:  # short
+            # Stop must be above entry; if not, flip it
+            if stop_level <= price:
+                stop_level = price + risk
             target_price = price - (risk * 2.0)
             
         trade = LiveTrade(

@@ -1,14 +1,24 @@
-2025-07-01 06:09:13,049 - BulletproofTrader - INFO - 🚀 BULLETPROOF LIVE TRADER STARTING...
-2025-07-01 06:09:13,050 - BulletproofTrader - INFO - 💰 Trading 4 symbols with $30,000 positions
-2025-07-01 06:09:13,051 - BulletproofTrader - INFO - 🔥 Live data feed STARTED
-2025-07-01 06:09:13,054 - BulletproofTrader - INFO - ✅ All systems ONLINE - Trading LIVE!
-2025-07-01 06:12:32,363 - BulletproofTrader - INFO - 🚀 BULLETPROOF LIVE TRADER STARTING...
-2025-07-01 06:12:32,363 - BulletproofTrader - INFO - 💰 Trading 4 symbols with $30,000 positions
-2025-07-01 06:12:32,366 - BulletproofTrader - INFO - 🔥 Live data feed STARTED
-2025-07-01 06:12:32,367 - BulletproofTrader - INFO - ✅ All systems ONLINE - Trading LIVE!
-2025-07-01 06:15:19,543 - BulletproofTrader - INFO - 🚀 BULLETPROOF LIVE TRADER STARTING...
-2025-07-01 06:15:19,543 - BulletproofTrader - INFO - 💰 Trading 4 symbols with $30,000 positions
-2025-07-01 06:15:19,544 - BulletproofTrader - INFO - 🔥 Live data feed STARTED
-2025-07-01 06:15:19,545 - BulletproofTrader - INFO - ✅ All systems ONLINE - Trading LIVE!
-2025-07-01 06:20:19,545 - BulletproofTrader - INFO - 📊 STATUS: 0 positions, $+0.00 PnL, 0 trades
-2025-07-01 06:25:19,546 - BulletproofTrader - INFO - 📊 STATUS: 0 positions, $+0.00 PnL, 0 trades
+]2025-07-03 06:05:59,629 - BulletproofTrader - INFO - 🛑 Shutting down...
+2025-07-03 06:06:02,492 - BulletproofTrader - INFO - 🚀 BULLETPROOF LIVE TRADER STARTING...
+2025-07-03 06:06:02,492 - BulletproofTrader - INFO - 💰 Trading 4 symbols with $30,000 positions
+2025-07-03 06:06:02,494 - BulletproofTrader - INFO - 🔥 Live data feed STARTED
+2025-07-03 06:06:02,496 - BulletproofTrader - INFO - ✅ All systems ONLINE - Trading LIVE!
+2025-07-03 06:06:36,496 - BulletproofTrader - INFO - 🎯 TRADE: BTC/USD LONG @ $109327.1000
+2025-07-03 06:06:36,497 - BulletproofTrader - INFO -    🛑 Stop: $108554.5582 | 🎯 Target: $110872.1836
+2025-07-03 06:06:37,497 - BulletproofTrader - INFO - 🎯 TRADE: ETH/USD LONG @ $2588.8200
+2025-07-03 06:06:37,497 - BulletproofTrader - INFO -    🛑 Stop: $2567.2030 | 🎯 Target: $2632.0540
+2025-07-03 06:06:39,499 - BulletproofTrader - INFO - 🎯 TRADE: XRP/USDT SHORT @ $2.2652
+2025-07-03 06:06:39,499 - BulletproofTrader - INFO -    🛑 Stop: $2.2700 | 🎯 Target: $2.2556
+2025-07-03 06:10:36,509 - BulletproofTrader - INFO - 🎯 TRADE: SOL/USDT SHORT @ $155.4200
+2025-07-03 06:10:36,510 - BulletproofTrader - INFO -    🛑 Stop: $156.0676 | 🎯 Target: $154.1248
+2025-07-03 06:11:02,496 - BulletproofTrader - INFO - 📊 STATUS: 4 positions, $+0.00 PnL, 4 trades
+2025-07-03 06:16:02,496 - BulletproofTrader - INFO - 📊 STATUS: 4 positions, $+0.00 PnL, 4 trades
+2025-07-03 06:20:17,531 - BulletproofTrader - INFO - 🚪 EXIT: XRP/USDT @ $2.2719 - stop_loss
+2025-07-03 06:20:17,532 - BulletproofTrader - INFO -    💰 PnL: $-88.73 (-0.30%)
+2025-07-03 06:20:17,532 - BulletproofTrader - INFO -    📈 Total: $-88.73
+2025-07-03 06:20:49,522 - BulletproofTrader - INFO - 🎯 TRADE: XRP/USDT LONG @ $2.2719
+2025-07-03 06:20:49,523 - BulletproofTrader - INFO -    🛑 Stop: $2.2535 | 🎯 Target: $2.3088
+2025-07-03 06:21:02,497 - BulletproofTrader - INFO - 📊 STATUS: 4 positions, $-88.73 PnL, 5 trades
+2025-07-03 06:26:02,497 - BulletproofTrader - INFO - 📊 STATUS: 4 positions, $-88.73 PnL, 5 trades
+2025-07-03 06:31:02,498 - BulletproofTrader - INFO - 📊 STATUS: 4 positions, $-88.73 PnL, 5 trades
+2025-07-03 06:36:02,498 - BulletproofTrader - INFO - 📊 STATUS: 4 positions, $-88.73 PnL, 5 trades
